@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.npm-cache/
+.artifacts/
+.backups/
+.data/
+*.sqlite*
+*.db*
+*.local
+*.tsbuildinfo
+.env
+.env.*
+!.env.example

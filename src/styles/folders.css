@@ -1,0 +1,226 @@
+.folder-breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 22px;
+  font-size: 12px;
+  color: #567064;
+}
+.folder-breadcrumbs span,
+.folder-breadcrumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+}
+.folder-breadcrumbs a {
+  overflow-wrap: anywhere;
+  padding: 5px 0;
+}
+.folder-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+.folder-breadcrumbs [aria-current] {
+  color: #263a38;
+  font-weight: 700;
+}
+.folder-explorer {
+  margin: 18px 0;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #e2e8e4;
+  border-radius: 13px;
+}
+.folder-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.folder-toolbar h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  margin: 0;
+}
+.folder-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+.folder-actions .button,
+.folder-settings summary {
+  min-height: 44px;
+}
+.folder-settings {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 12px;
+  color: #567064;
+}
+.folder-settings summary {
+  cursor: pointer;
+  padding: 12px 8px;
+  border-radius: 6px;
+}
+.folder-settings summary:hover {
+  background: #f4f7f2;
+}
+.folder-settings summary:focus-visible {
+  outline: 2px solid #277966;
+  outline-offset: 2px;
+}
+.folder-settings[open] {
+  flex-basis: 100%;
+}
+.folder-settings-content {
+  padding: 12px;
+  border: 1px solid #e2e8e4;
+  border-radius: 8px;
+  background: #f9fbf7;
+}
+.folder-settings-content p {
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+.folder-settings-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.folder-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 10px;
+}
+.folder-card {
+  min-width: 0;
+  border: 1px solid #dce6df;
+  border-radius: 10px;
+  background: #fcfdfb;
+}
+.folder-card:hover {
+  border-color: #97b7a4;
+}
+.folder-open {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px 10px;
+}
+.folder-open > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.folder-open strong {
+  display: block;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.folder-open small {
+  display: block;
+  color: #7b867c;
+  font-size: 11px;
+  margin-top: 5px;
+}
+.folder-icon {
+  color: #9d812f;
+  background: #fbf0cd;
+  border-radius: 10px;
+  padding: 9px;
+}
+.folder-card-actions {
+  border-top: 1px solid #edf0e9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 2px 8px;
+}
+.folder-card-actions .icon-button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.folder-empty {
+  color: #687c6d;
+  margin: 0;
+  line-height: 1.8;
+  font-size: 12px;
+}
+.folder-hint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #667b6c;
+}
+.folder-study {
+  margin: 22px 0;
+  border: 1px solid #dce6df;
+  border-radius: 12px;
+  background: #fff;
+}
+.folder-study summary {
+  cursor: pointer;
+  padding: 18px 22px;
+  font-weight: 650;
+  color: #277966;
+}
+.folder-study .study-launcher {
+  margin: 0;
+  border: 0;
+}
+.folder-word-scope {
+  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: #64786b;
+  overflow-wrap: anywhere;
+}
+.folder-word-scope label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  font-size: 12px;
+}
+.folder-word-scope select {
+  max-width: 100%;
+  border: 1px solid #d4dfd7;
+  border-radius: 6px;
+  background: #fff;
+  padding: 9px;
+}
+@media (max-width: 640px) {
+  .folder-explorer {
+    padding: 14px;
+  }
+  .folder-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .folder-toolbar {
+    align-items: flex-start;
+  }
+  .folder-actions {
+    width: 100%;
+  }
+  .folder-actions > .button {
+    flex: 0 1 auto;
+  }
+  .folder-settings[open] {
+    width: 100%;
+  }
+  .folder-open {
+    padding: 16px 12px 10px;
+  }
+}

@@ -1,0 +1,80 @@
+.mobile-access-button {
+  gap: 7px;
+  font-size: 12px;
+}
+.topbar-mobile-access {
+  display: none;
+  margin-left: 18px;
+}
+.mobile-access-content {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.mobile-access-qr {
+  display: block;
+  width: min(320px, 100%);
+  height: auto;
+  margin: 0 auto 16px;
+  border-radius: 10px;
+}
+.mobile-access-steps {
+  text-align: left;
+  padding-left: 22px;
+  margin: 16px 0;
+}
+.mobile-access-steps li {
+  margin: 9px 0;
+}
+.mobile-access-url {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #277966;
+  text-decoration: underline;
+  margin: 16px 0;
+  user-select: all;
+}
+.mobile-access-note {
+  margin-top: 18px;
+  color: #6b7c72;
+  text-align: left;
+  font-size: 12px;
+}
+.mobile-access-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 0;
+}
+.mobile-access-unavailable {
+  background: #f6f8f5;
+  border-radius: 12px;
+  padding: 24px 18px;
+  color: #567064;
+}
+.mobile-access-unavailable svg {
+  margin: 0 auto 12px;
+}
+.mobile-access-unavailable h3 {
+  font-size: 16px;
+  color: #263a38;
+  margin-bottom: 12px;
+}
+.mobile-access-unavailable p + p {
+  margin-top: 12px;
+}
+.mobile-access-panel {
+  margin-top: 24px;
+}
+.mobile-access-panel > p {
+  margin: 12px 0 18px;
+  color: #64766c;
+  font-size: 13px;
+  line-height: 1.9;
+}
+@media (min-width: 1024px) {
+  .topbar-mobile-access {
+    display: inline-flex;
+  }
+}

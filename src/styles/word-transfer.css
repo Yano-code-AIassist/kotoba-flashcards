@@ -1,0 +1,330 @@
+.word-filters {
+  padding: 18px;
+  border: 1px solid #dee7dc;
+  border-radius: 10px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+.word-filter-fields {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.word-search-field {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.word-status-field {
+  flex: 1 1 140px;
+}
+.word-filters label,
+.word-export-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #58725d;
+  margin-bottom: 8px;
+}
+.word-filters .text-input {
+  font-size: 14px;
+  min-height: 44px;
+  padding: 9px 12px;
+}
+.word-filters select,
+.word-export-controls select,
+.word-import-form select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #dbe5d8;
+  border-radius: 6px;
+  background: white;
+  font-size: 13px;
+  color: #3c5a44;
+}
+.word-filters .button {
+  min-height: 44px;
+  font-size: 11px;
+}
+.word-filter-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  color: #6d7e64;
+  font-size: 10px;
+  line-height: 1.9;
+}
+.word-filter-summary strong {
+  color: #356749;
+  font-size: 14px;
+}
+.word-filter-empty {
+  background: #fff;
+  border: 1px solid #dee7dc;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+}
+.word-filter-empty svg {
+  margin: 0 auto 15px;
+  color: #6d9371;
+}
+.word-filter-empty h2 {
+  font-weight: 600;
+  font-size: 19px;
+}
+.word-filter-empty p {
+  color: #687f63;
+  font-size: 12px;
+  margin: 14px 0 22px;
+  line-height: 1.9;
+}
+.word-transfer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-bottom: 20px;
+}
+.word-transfer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.word-transfer-controls .button {
+  min-height: 44px;
+  padding: 9px 12px;
+  font-size: 11px;
+}
+.word-export-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.word-export-controls label {
+  width: 100%;
+  margin-bottom: 0;
+}
+.word-export-controls select {
+  width: auto;
+  max-width: 100%;
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+}
+.word-transfer-hint {
+  flex-basis: 100%;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #6d7d66;
+}
+.word-transfer-controls > .inline-error {
+  flex-basis: 100%;
+}
+.app-dialog.wide-dialog {
+  width: min(960px, calc(100% - 32px));
+  max-width: 960px;
+}
+.word-import-form {
+  min-width: 0;
+}
+.word-import-form .field-label {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.import-help {
+  font-size: 11px;
+  color: #63785d;
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+.import-paste {
+  min-height: 180px;
+  font-size: 14px;
+  line-height: 1.9;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+}
+.import-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #476641;
+}
+.import-checkbox input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: #277966;
+}
+.import-file-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.import-file-fields input[type='file'] {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  font-size: 12px;
+  padding: 8px 0;
+}
+.import-file-fields input::file-selector-button {
+  padding: 9px 11px;
+  margin-right: 8px;
+  border: 1px solid #dbe5d8;
+  border-radius: 6px;
+  background: #f4f8f1;
+}
+.import-file-name {
+  font-size: 11px;
+  color: #62775b;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+.word-import-form > .button {
+  min-height: 44px;
+  font-size: 12px;
+}
+.import-preview-summary {
+  padding: 17px;
+  margin-top: 20px;
+  background: #f0f6ed;
+  border-radius: 8px;
+  outline-offset: 3px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.import-preview-summary h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.import-preview-summary strong {
+  font-size: 19px;
+  color: #277966;
+}
+.import-preview-summary .form-error {
+  margin-top: 8px;
+}
+.import-preview-scroll {
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 1px solid #e0e7de;
+  border-radius: 7px;
+}
+.import-preview-scroll-hint {
+  display: none;
+}
+@media (max-width: 767px) {
+  .import-preview-scroll-hint {
+    display: block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #52694d;
+    line-height: 1.8;
+  }
+  .word-export-controls select,
+  .word-import-form select {
+    font-size: 16px;
+  }
+}
+.import-preview table {
+  width: 100%;
+  min-width: 620px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+.import-preview th,
+.import-preview td {
+  padding: 10px;
+  font-size: 11px;
+  vertical-align: top;
+  line-height: 1.8;
+  border-bottom: 1px solid #e4eadf;
+  overflow-wrap: anywhere;
+}
+.import-preview thead th {
+  background: #f5f8f1;
+  font-weight: 600;
+}
+.import-preview th:first-child {
+  width: 60px;
+}
+.import-preview th:last-child {
+  width: 140px;
+}
+.import-preview td > div {
+  white-space: pre-wrap;
+}
+.import-invalid-row {
+  background: #fff4ef;
+  color: #954d38;
+}
+.import-skipped-row {
+  background: #f6f6f0;
+  color: #70796c;
+}
+.import-preview-pages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.import-preview-pages .button {
+  min-height: 40px;
+  font-size: 10px;
+  padding: 8px;
+}
+.import-dialog-actions {
+  position: sticky;
+  bottom: -1px;
+  background: #fff;
+  padding: 16px 0 8px;
+  border-top: 1px solid #e2eadf;
+  z-index: 2;
+}
+.import-dialog-actions .button {
+  min-height: 46px;
+}
+.word-import-form > .inline-error {
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .word-status-field {
+    flex: 0 1 170px;
+  }
+  .word-export-controls {
+    margin-left: auto;
+  }
+  .word-export-controls label {
+    width: auto;
+  }
+  .import-file-fields {
+    grid-template-columns: minmax(0, 1fr) 190px;
+  }
+}
+@media (max-width: 599px) {
+  .word-filters .text-input,
+  .word-filters select,
+  .import-paste {
+    font-size: 16px;
+  }
+  .word-export-controls {
+    flex-basis: 100%;
+  }
+}

@@ -1,0 +1,75 @@
+.storage-recovery {
+  max-width: 720px;
+  margin: 36px auto;
+  padding: 28px;
+  border: 1px solid #e5d8c9;
+  border-radius: 12px;
+  background: #fff;
+}
+.storage-recovery > svg {
+  color: #967347;
+}
+.storage-recovery h1 {
+  margin: 18px 0;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.storage-recovery p {
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.storage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.storage-actions .button {
+  min-height: 48px;
+  font-size: 12px;
+}
+.storage-reset {
+  border-top: 1px solid #edf0e8;
+  margin-top: 25px;
+  padding-top: 20px;
+}
+.storage-reset .button {
+  font-size: 12px;
+}
+.storage-conflict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  margin-bottom: 24px;
+  border: 1px solid #ddc9a5;
+  border-radius: 9px;
+  background: #fff9ee;
+  color: #785f34;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.storage-conflict > div {
+  flex: 1 1 260px;
+}
+.storage-conflict p {
+  margin-top: 5px;
+}
+.storage-conflict .button {
+  font-size: 12px;
+}
+@media (max-width: 599px) {
+  .storage-recovery {
+    padding: 22px 17px;
+  }
+  .storage-recovery h1 {
+    font-size: 21px;
+  }
+  .storage-actions {
+    flex-direction: column;
+  }
+}

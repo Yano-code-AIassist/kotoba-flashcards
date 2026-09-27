@@ -1,0 +1,533 @@
+/* 単語管理・入力フォーム専用。既存画面の共通スタイルはindex.cssで管理する。 */
+.detail-word-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+.detail-word-actions .button {
+  margin-top: 0;
+}
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.status-unlearned {
+  background: #f0f3f0;
+  color: #627569;
+}
+.status-learning {
+  background: #fbf2e4;
+  color: #8b642e;
+}
+.status-remembered {
+  background: #eaf5ee;
+  color: #347252;
+}
+.manager-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 8px 0 28px;
+}
+.manager-location {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-bottom: 10px;
+}
+.manager-location .back-link,
+.manager-location .folder-breadcrumbs {
+  margin: 0;
+}
+.manager-location .back-link {
+  flex-shrink: 0;
+}
+.manager-location .folder-breadcrumbs {
+  min-width: 0;
+}
+.manager-heading h1,
+.editor-page-heading h1 {
+  overflow-wrap: anywhere;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  margin-top: 9px;
+}
+.manager-heading > div {
+  min-width: 0;
+}
+.manager-heading > div > p:last-child {
+  font-size: 12px;
+  color: #68796e;
+  line-height: 1.9;
+  margin-top: 8px;
+}
+.manager-heading > .button {
+  padding: 11px 12px;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+.deck-chooser {
+  display: grid;
+  gap: 14px;
+}
+.deck-choice {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 22px;
+  border: 1px solid #e0e8e1;
+  background: #fff;
+  border-radius: 11px;
+}
+.deck-choice:hover {
+  border-color: #82b59c;
+  background: #fbfdfb;
+}
+.deck-choice > div {
+  min-width: 0;
+  flex: 1;
+}
+.deck-choice h2 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.deck-choice p {
+  font-size: 12px;
+  color: #68796e;
+  margin-top: 5px;
+}
+.deck-choice > svg {
+  color: #82a491;
+}
+.word-list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #e3eae5;
+  border-radius: 10px;
+}
+.deck-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+.deck-select-field label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #698572;
+}
+.deck-select-field select {
+  min-width: 0;
+  width: 100%;
+  max-width: 440px;
+  min-height: 44px;
+  padding: 8px 25px 8px 10px;
+  color: #3e5948;
+  background: #f9fbf8;
+  border: 1px solid #dce6db;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+}
+.word-list-total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #758976;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.word-list-total strong {
+  color: #3e6451;
+  font-weight: 600;
+  font-size: 23px;
+}
+.word-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.word-list-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 650;
+}
+.word-list-heading > p {
+  font-size: 10px;
+  color: #728270;
+}
+.word-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.word-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e0e8e1;
+  border-radius: 11px;
+  background: #fff;
+}
+.word-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.word-number {
+  font-size: 12px;
+  color: #9aa99c;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+.word-card-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: -7px;
+}
+.word-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 21px;
+  margin: 0;
+}
+.word-fields > div {
+  min-width: 0;
+}
+.word-fields dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #6c7f70;
+  margin-bottom: 9px;
+}
+.word-fields dt > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 4px;
+  background: #f0f5ef;
+  color: #79997d;
+  font-size: 10px;
+  font-weight: 600;
+}
+.word-fields dd {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #465d4d;
+}
+.word-fields dd.word-question {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2f493a;
+}
+.word-note {
+  grid-column: 1 / -1;
+  border-top: 1px solid #edf1eb;
+  padding-top: 17px;
+}
+.word-note dd {
+  font-size: 12px;
+  color: #68796b;
+}
+.editor-page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 8px 0 28px;
+}
+.editor-page-heading > div {
+  min-width: 0;
+}
+.editor-page-heading > .status-badge {
+  margin-top: 24px;
+}
+.editor-deck-name {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  color: #6f8475;
+  margin-top: 11px;
+  line-height: 1.8;
+}
+.editor-deck-name svg {
+  margin-top: 3px;
+}
+.editor-deck-name span {
+  overflow-wrap: anywhere;
+}
+.word-form {
+  min-width: 0;
+}
+.word-form-panel {
+  background: #fff;
+  border: 1px solid #e0e8e1;
+  border-radius: 11px;
+  padding: 21px 18px;
+  margin-bottom: 20px;
+}
+.word-form-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.form-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 31px;
+  height: 31px;
+  border-radius: 7px;
+  background: #edf4ed;
+  color: #6d9278;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.word-form-intro h2 {
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.7;
+}
+.word-form-intro p {
+  font-size: 11px;
+  color: #738372;
+  line-height: 1.9;
+  margin-top: 3px;
+}
+.required-legend {
+  display: none;
+}
+.word-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+}
+.word-form-field {
+  min-width: 0;
+}
+.word-form .field-label {
+  font-size: 13px;
+  margin-bottom: 11px;
+}
+.word-textarea {
+  resize: vertical;
+  min-height: 125px;
+  line-height: 1.9;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px;
+}
+.word-textarea::placeholder {
+  font-size: 12px;
+  color: #80917f;
+}
+.word-textarea:read-only {
+  background: #f4f6f1;
+}
+.note-textarea {
+  min-height: 116px;
+}
+.word-form .input-hint {
+  align-items: flex-start;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.word-form .input-hint > span:first-child {
+  min-width: 0;
+}
+.word-form .form-error {
+  margin-top: 9px;
+}
+.word-form-note {
+  color: #65755f;
+  font-size: 11px;
+  line-height: 1.9;
+  margin: 0 2px 20px;
+}
+.word-delete-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0 22px;
+}
+.word-delete-row > span {
+  color: #7c8071;
+  font-size: 11px;
+}
+.word-delete-row > .button {
+  font-size: 11px;
+  padding: 9px 12px;
+}
+/* 下部ナビの上に置き、保存ボタンが重ならない余白を確保する。 */
+.word-form-actions {
+  position: sticky;
+  bottom: calc(74px + env(safe-area-inset-bottom));
+  z-index: 5;
+  padding: 13px;
+  border: 1px solid #dfe7de;
+  border-radius: 10px;
+  background: #ffffffed;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px #35563d08;
+}
+.draft-indicator {
+  display: block;
+  font-size: 10px;
+  color: #6e836e;
+  margin-bottom: 9px;
+}
+.word-form-actions > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.word-form-actions .button {
+  min-height: 48px;
+  font-size: 12px;
+  padding: 11px 8px;
+}
+.editor-toast-region {
+  bottom: calc(195px + env(safe-area-inset-bottom));
+}
+.delete-word-label {
+  display: block;
+  font-size: 11px;
+  color: #866c60;
+  margin-bottom: 7px;
+}
+.delete-word-question {
+  display: block;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 150px;
+  overflow-y: auto;
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .deck-chooser {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .manager-heading h1,
+  .editor-page-heading h1 {
+    font-size: 28px;
+  }
+  .manager-heading > .button {
+    padding: 11px 20px;
+    font-size: 13px;
+  }
+  .word-list-toolbar {
+    padding: 15px 23px;
+  }
+  .deck-select-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+  .deck-select-field label {
+    flex-shrink: 0;
+  }
+  .word-card {
+    padding: 20px 26px 26px;
+  }
+  .word-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+  .word-form-panel {
+    padding: 26px;
+  }
+  .word-form-intro {
+    gap: 13px;
+  }
+  .required-legend {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-left: auto;
+    font-size: 10px;
+    color: #809178;
+  }
+  .word-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .word-form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+  }
+  .draft-indicator {
+    margin: 0;
+  }
+  .word-form-actions > div {
+    min-width: 290px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .editor-toast-region {
+    bottom: 112px;
+  }
+  .word-form-actions {
+    bottom: 20px;
+  }
+  .word-editor-page {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+}
+.draft-recovery-notice {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid #c9ddc9;
+  border-radius: 9px;
+  background: #f0f7ef;
+  color: #416a4f;
+  font-size: 12px;
+  line-height: 1.8;
+}
