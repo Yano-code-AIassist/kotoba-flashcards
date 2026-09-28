@@ -52,15 +52,19 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
     try {
       const url = new URL(env.DATABASE_URL);
       if (!['postgres:', 'postgresql:'].includes(url.protocol) || !url.hostname) throw new Error();
+      if (env.DATABASE_PASSWORD) url.password = env.DATABASE_PASSWORD;
+      const decodedPassword = decodeURIComponent(url.password);
+      if (/YOUR[-_ ]?PASSWORD/i.test(decodedPassword))
+        throw new Error('DATABASE_PASSWORD を設定してください。');
       if (
         production &&
         !['verify-full', 'verify-ca', 'require'].includes(url.searchParams.get('sslmode') || '')
       )
         throw new Error();
-      databaseUrl = env.DATABASE_URL;
+      databaseUrl = url.toString();
     } catch {
       throw new Error(
-        'DATABASE_URL に正しいPostgreSQL接続URLを設定してください。本番は sslmode=require 以上が必要です。',
+        'DATABASE_URL に正しいPostgreSQL接続URLを設定してください。パスワードを別欄にする場合は DATABASE_PASSWORD も必要です。本番は sslmode=require 以上が必要です。',
       );
     }
   }

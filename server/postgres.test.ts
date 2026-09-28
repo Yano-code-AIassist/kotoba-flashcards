@@ -166,10 +166,22 @@ it('無料ホスティングではPostgreSQLを必須にし、誤った設定で
   expect(() =>
     readConfig({ ...env, DATABASE_URL: 'postgresql://user:secret@db.example.com/app' }),
   ).toThrow(/sslmode/);
+  expect(() =>
+    readConfig({
+      ...env,
+      DATABASE_URL:
+        'postgresql://user:[YOUR-PASSWORD]@db.example.com/app?sslmode=require',
+    }),
+  ).toThrow(/DATABASE_PASSWORD/);
   const configured = readConfig({
     ...env,
-    DATABASE_URL: 'postgresql://user:secret@db.example.com/app?sslmode=verify-full',
+    DATABASE_URL:
+      'postgresql://user:[YOUR-PASSWORD]@db.example.com/app?sslmode=verify-full',
+    DATABASE_PASSWORD: '記号/を含む@安全なパスワード',
   });
   expect(configured.origin).toBe('https://kotoba-test.onrender.com');
   expect(configured.databaseUrl).toContain('sslmode=verify-full');
+  expect(new URL(configured.databaseUrl!).password).toBe(
+    encodeURIComponent('記号/を含む@安全なパスワード'),
+  );
 });
