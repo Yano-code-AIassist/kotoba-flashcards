@@ -61,6 +61,10 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
         !['verify-full', 'verify-ca', 'require'].includes(url.searchParams.get('sslmode') || '')
       )
         throw new Error();
+      // pg 8.23以降でも sslmode=require をlibpqと同じ「暗号化必須」として扱う。
+      // 証明書まで検証する環境では verify-full を明示し、この互換設定は追加しない。
+      if (url.searchParams.get('sslmode') === 'require' && !url.searchParams.has('uselibpqcompat'))
+        url.searchParams.set('uselibpqcompat', 'true');
       databaseUrl = url.toString();
     } catch {
       throw new Error(

@@ -184,4 +184,9 @@ it('無料ホスティングではPostgreSQLを必須にし、誤った設定で
   expect(new URL(configured.databaseUrl!).password).toBe(
     encodeURIComponent('記号/を含む@安全なパスワード'),
   );
+  const encrypted = readConfig({
+    ...env,
+    DATABASE_URL: 'postgresql://user:secret@db.example.com/app?sslmode=require',
+  });
+  expect(new URL(encrypted.databaseUrl!).searchParams.get('uselibpqcompat')).toBe('true');
 });
