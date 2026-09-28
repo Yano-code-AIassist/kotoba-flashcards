@@ -12,6 +12,7 @@ export interface ServerConfig {
   google?: { clientId: string; clientSecret: string };
   line?: { clientId: string; clientSecret: string };
   resend?: { apiKey: string; from: string };
+  brevo?: { apiKey: string; fromEmail: string; fromName: string };
   ai?: {
     provider: 'gemini';
     apiKey: string;
@@ -91,10 +92,22 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
     env.RESEND_API_KEY && env.MAIL_FROM
       ? { apiKey: env.RESEND_API_KEY, from: env.MAIL_FROM }
       : undefined;
-  if (smtp && resend)
-    throw new Error('メール送信は SMTP または Resend のどちらか一方を設定してください。');
-  if ((production || !loopback) && !smtp && !resend)
-    throw new Error('公開環境ではメール確認のため SMTP または Resend の設定が必要です。');
+  if (!!env.BREVO_API_KEY !== !!env.BREVO_FROM_EMAIL)
+    throw new Error('BREVO_API_KEY と BREVO_FROM_EMAIL は両方設定してください。');
+  if (env.BREVO_FROM_EMAIL && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(env.BREVO_FROM_EMAIL))
+    throw new Error('BREVO_FROM_EMAIL に正しいメールアドレスを設定してください。');
+  const brevo =
+    env.BREVO_API_KEY && env.BREVO_FROM_EMAIL
+      ? {
+          apiKey: env.BREVO_API_KEY,
+          fromEmail: env.BREVO_FROM_EMAIL,
+          fromName: env.BREVO_FROM_NAME?.trim() || 'Kotoba Flashcards',
+        }
+      : undefined;
+  if ([smtp, resend, brevo].filter(Boolean).length > 1)
+    throw new Error('メール送信は SMTP、Resend、Brevo のいずれか一つだけを設定してください。');
+  if ((production || !loopback) && !smtp && !resend && !brevo)
+    throw new Error('公開環境ではメール確認のため SMTP、Resend、Brevo の設定が必要です。');
   function provider(prefix: string) {
     const clientId = env[`${prefix}_CLIENT_ID`];
     const clientSecret = env[`${prefix}_CLIENT_SECRET`];
@@ -129,6 +142,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
       .filter(Boolean),
     smtp,
     resend,
+    brevo,
     ai,
     databasePath: resolve(env.DATABASE_PATH || '.data/kotoba.sqlite'),
     databaseUrl,

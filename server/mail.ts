@@ -26,6 +26,39 @@ export function createMailer(config: ServerConfig) {
       close() {},
     };
   }
+  if (config.brevo) {
+    const { apiKey, fromEmail, fromName } = config.brevo;
+    return {
+      async send(to: string, subject: string, text: string) {
+        const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            'api-key': apiKey,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sender: { email: fromEmail, name: fromName },
+            to: [{ email: to }],
+            subject,
+            textContent: text,
+          }),
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!response.ok) throw new Error('確認メールを送信できませんでした。');
+        const result: unknown = await response.json();
+        if (
+          typeof result !== 'object' ||
+          result === null ||
+          !('messageId' in result) ||
+          typeof result.messageId !== 'string' ||
+          !result.messageId
+        )
+          throw new Error('メール送信の結果を確認できませんでした。');
+      },
+      close() {},
+    };
+  }
   if (!config.smtp) return null;
   const { smtp } = config;
   const transport = nodemailer.createTransport({

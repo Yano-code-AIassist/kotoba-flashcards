@@ -13,7 +13,7 @@ npm run dev
 
 [アプリを開く](http://127.0.0.1:5173/)。`npm run dev` は画面とAPIを一緒に起動します。「初めての方：アカウントを作成」で、表示名・メールアドレス・10〜128文字のパスワードを登録します。終了はCtrl+Cです。
 
-**メール配信未設定で利用できるのはローカル開発用のメール＋パスワード認証です。この状態では確認メールを送りません。** Google・LINEは設定するまで「準備中」と表示します。SMTPまたはResendを設定すると登録時のメール確認とパスワード再設定が有効になります。
+**メール配信未設定で利用できるのはローカル開発用のメール＋パスワード認証です。この状態では確認メールを送りません。** Google・LINEは設定するまで「準備中」と表示します。SMTP、ResendまたはBrevoを設定すると登録時のメール確認とパスワード再設定が有効になります。
 
 認証情報と単語帳は、初期設定では `.data/kotoba.sqlite` に保存します。`DATABASE_URL` を設定すると外部PostgreSQLへ保存します。開発用の認証シークレットは `.data/auth-secret` に自動生成します。`.data` を削除するとローカルのアカウントやデータが失われるため、保管してください。これらはGit管理対象外です。
 
@@ -46,7 +46,15 @@ npm run dev
 
 ## 確認メール・パスワード再設定
 
-SMTPのほか、HTTPS経由のResendにも対応しています。RailwayのHobbyなどSMTPを使えない公開先では、`RESEND_API_KEY` と、検証済みドメインの送信元 `MAIL_FROM` を設定します。SMTPとの同時設定はできません。[公開手順とメール配信設定](mobile-publishing.md)を参照してください。以下はSMTPを使う場合の手順です。
+SMTPのほか、HTTPS経由のResendとBrevoにも対応しています。Render FreeなどSMTPを使えない公開先では、どちらか一方のHTTPS APIを利用します。Resendの `resend.dev` テスト用送信元はResendアカウント本人にしか送れないため、他の利用者へ送るには検証済みドメインが必要です。独自ドメインなしの動作確認では、Brevoで送信者メールアドレスを確認して次を設定できます。
+
+```dotenv
+BREVO_API_KEY=Brevoで発行したAPIキー
+BREVO_FROM_EMAIL=Brevoで確認済みの送信者メールアドレス
+BREVO_FROM_NAME=Kotoba Flashcards
+```
+
+Brevo、Resend、SMTPは同時に設定できません。[公開手順とメール配信設定](mobile-publishing.md)を参照してください。以下はSMTPを使う場合の手順です。
 
 利用するメール配信サービスのSMTP情報を設定します。
 
@@ -81,9 +89,9 @@ SMTP設定後の新規登録ではメール内のリンクを開いて登録を�
 
 同じサーバーにアクセスし、同じアカウントでログインすると保存内容を利用できます。今の初期設定はこのPC専用です。別のPCでそれぞれ `npm run dev` を起動するだけでは、別々のデータベースになるため共有されません。
 
-公開する場合は、Node.jsが動作するサーバー・永続ディスクまたは外部PostgreSQL・HTTPSが必要です。静的ファイルだけを配信するホスティングでは認証APIを動かせません。無料枠を優先するRender + Neonの構成とQRの手順は[外部公開の説明](mobile-publishing.md)を参照してください。今回、公開先の作成・契約・デプロイは行っていません。
+公開する場合は、Node.jsが動作するサーバー・永続ディスクまたは外部PostgreSQL・HTTPSが必要です。静的ファイルだけを配信するホスティングでは認証APIを動かせません。無料枠を優先するRender + Supabaseの構成とQRの手順は[外部公開の説明](mobile-publishing.md)を参照してください。公開テスト版はデプロイ済みで、実メール認証と端末間同期を確認中です。
 
-本番では `APP_ORIGIN=https://実際のドメイン`、32文字以上のランダムな `BETTER_AUTH_SECRET`、SMTPまたはResend、各プロバイダーの本番コールバックURLを設定します。シークレットは例えば `node -e "console.log(require('node:crypto').randomBytes(48).toString('hex'))"` で生成し、公開せず環境変数に保存します。
+本番では `APP_ORIGIN=https://実際のドメイン`、32文字以上のランダムな `BETTER_AUTH_SECRET`、SMTP・Resend・Brevoのいずれか一つ、各プロバイダーの本番コールバックURLを設定します。シークレットは例えば `node -e "console.log(require('node:crypto').randomBytes(48).toString('hex'))"` で生成し、公開せず環境変数に保存します。
 
 ```powershell
 npm ci

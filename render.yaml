@@ -1,4 +1,4 @@
-# 無料Webサービス + 外部PostgreSQL（Neon Free等）。有料ディスクやDBは作成しません。
+# 無料Webサービス + 外部PostgreSQL（Supabase Free等）。有料ディスクやDBは作成しません。
 services:
   - type: web
     name: kotoba
@@ -20,6 +20,12 @@ services:
         sync: false
       - key: MAIL_FROM
         sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_FROM_EMAIL
+        sync: false
+      - key: BREVO_FROM_NAME
+        value: Kotoba Flashcards
       - key: GEMINI_API_KEY
         sync: false
       - key: GEMINI_MODEL

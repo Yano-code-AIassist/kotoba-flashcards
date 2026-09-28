@@ -5,9 +5,9 @@
 PCの上部と「設定」に「スマホで開く」を追加しています。
 公開後は、QRコードをスマホのカメラで読み取り、同じアカウントでログインすると、PCと同じ単語帳を使えます。
 
-**外部へのデプロイはまだ行っていません。現在の `127.0.0.1` はこのPC専用です。**
+公開テスト版は [https://kotoba-qv50.onrender.com/](https://kotoba-qv50.onrender.com/) です。Renderのデプロイ成功、公開画面、PostgreSQLを含む正常性API、QR用URLを確認しました。
 ローカル起動時にはQRコードの代わりに、公開が必要なことを案内します。
-実機や外出先の回線で使えることを、現時点で確認したわけではありません。
+実メール認証、ログイン後の保存、実機のカメラ、携帯回線からの同期は引き続き確認が必要です。
 
 ## 操作テスト
 
@@ -30,7 +30,7 @@ HTTPSの検証用URLへの通信はローカルの検証サーバーへ転送し
 | フォルダー削除の取り消し・確定、別階層の単語の維持          | 成功 |
 | QR取得の一時エラー後に再試行、PC専用URLではQRを表示しない   | 成功 |
 
-未確認：実機のカメラによる読み取り、iOS Safari／Android Chromeの実機操作、実際の画面キーボード、携帯回線からの接続、実メール送信、Google／LINEの実認証。
+未確認：実機のカメラによる読み取り、iOS Safari／Android Chromeの実機操作、実際の画面キーボード、携帯回線からの接続、確認リンクを使った実メール認証、Google／LINEの実認証。Resendアカウント本人への実メール配信までは成功しています。
 
 ## QRコードの動作
 
@@ -47,7 +47,7 @@ HTTPSの検証用URLへの通信はローカルの検証サーバーへ転送し
 このアプリはNode.jsサーバーを使い、保存先はローカルのSQLiteまたは外部のPostgreSQLです。画面だけを静的サイトとして公開しても、ログイン・アカウント保存は動作しません。
 
 ```text
-PC・スマホ → 同じHTTPS公開URL → Node.jsサーバー → PostgreSQL（無料案はNeon）
+PC・スマホ → 同じHTTPS公開URL → Node.jsサーバー → PostgreSQL（Supabase Free）
                                   └→ 確認メールの配信サービス
 ```
 
@@ -66,15 +66,15 @@ PC・スマホ → 同じHTTPS公開URL → Node.jsサーバー → PostgreSQL�
 Docker実行環境がこのPCにないため、Dockerイメージそのもののビルドは未検証です。
 代わりに生成したサーバーをNode.jsで起動し、画面・正常性API・QR用URL・メール確認設定を確認しました。
 
-## 無料枠を優先する場合：Render + Neon
+## 無料枠を優先する場合：Render + Supabase
 
-2026年9月24日時点で、無料枠の候補を **Render Free（アプリ）+ Neon Free（PostgreSQL）** としています。メール配信にはResendの無料枠を使える構成です。契約・料金・利用量の条件は変更されるため、作成時にも公式ページで確認してください。
+2026年9月29日時点で、公開テスト版は **Render Free（アプリ）+ Supabase Free（PostgreSQL）** を使っています。メール配信はResendまたはBrevoのHTTPS APIに対応しています。契約・料金・利用量の条件は変更されるため、作成時にも公式ページで確認してください。
 
-| 担当                 | サービス    | 注意点                                                                                  |
-| -------------------- | ----------- | --------------------------------------------------------------------------------------- |
-| アプリとHTTPS公開URL | Render Free | 15分間アクセスがないと休止。次回の表示に約1分かかる。ローカルファイルは再起動等で消える |
-| アカウントと単語帳   | Neon Free   | 無料枠の容量・計算時間・転送量に上限がある                                              |
-| 確認メール           | Resend Free | 無料枠に送信上限がある。一般向けに送るには送信ドメインの検証が必要                      |
+| 担当                 | サービス            | 注意点                                                                                  |
+| -------------------- | ------------------- | --------------------------------------------------------------------------------------- |
+| アプリとHTTPS公開URL | Render Free         | 15分間アクセスがないと休止。次回の表示に約1分かかる。ローカルファイルは再起動等で消える |
+| アカウントと単語帳   | Supabase Free       | 無料枠の容量・計算時間・転送量に上限がある                                              |
+| 確認メール           | Resend / Brevo Free | 無料枠に送信上限がある。Resendで一般向けに送るには送信ドメインの検証が必要              |
 
 Render自身の無料PostgreSQLは作成30日後に期限切れになるため、継続保存先としてはこの構成に含めていません。公開用の `onrender.com` アドレスには独自ドメインの購入は不要です。ただし、Resendのメール用ドメインを持っていない場合、その取得費用は別途検討が必要です。アプリ全体を永久・無制限に0円で運用できるという意味ではありません。
 
@@ -82,19 +82,19 @@ Render公式は無料インスタンスを本番サービス向けとはして�
 
 手順：
 
-1. RenderとNeonの無料アカウントを用意します。NeonをCodexへ接続すると、DBの設定を続けられます。APIキーや接続文字列を会話に貼り付ける必要はありません。
-2. NeonでFreeプランのプロジェクトを作り、接続文字列を取得します。アプリ用に使える接続数に収めるため、通常は接続プール用URLを使います。本番ではSSL付きの接続URLを設定します。
+1. RenderとSupabaseの無料アカウントを用意します。APIキーや接続文字列を会話に貼り付ける必要はありません。
+2. SupabaseでFreeプランのプロジェクトを作り、Session poolerの接続文字列を取得します。本番ではSSL付きの接続URLを設定します。
 3. ソースを管理する**非公開リポジトリー**をRenderに接続し、`render.yaml` を使ってBlueprintを作成します。FreeのWebサービス1つだけであることを確認します。`.data` や `.env` はリポジトリーに含めません。
-4. `DATABASE_URL` にNeonの接続URLを設定します。`REQUIRE_POSTGRES=true` により、設定漏れのまま一時的なSQLiteへ保存してしまう起動を拒否します。
-5. メール配信の `RESEND_API_KEY` と `MAIL_FROM` を設定します。これらはRenderの環境変数に保存します。認証シークレットはBlueprintが生成します。資料からAI生成も使う場合は、`GEMINI_API_KEY` と[AI生成の設定](ai-generation.md)にある利用上限を設定します。
+4. `DATABASE_URL` と `DATABASE_PASSWORD` にSupabaseの接続情報を設定します。`REQUIRE_POSTGRES=true` により、設定漏れのまま一時的なSQLiteへ保存してしまう起動を拒否します。
+5. メール配信はResendの `RESEND_API_KEY` と `MAIL_FROM`、またはBrevoの `BREVO_API_KEY`・`BREVO_FROM_EMAIL`・`BREVO_FROM_NAME` を設定します。これらはRenderの環境変数に保存します。資料からAI生成も使う場合は、`GEMINI_API_KEY` と[AI生成の設定](ai-generation.md)にある利用上限を設定します。
 6. Renderが発行する `RENDER_EXTERNAL_URL` を公開URLとして自動採用します。独自ドメインへ変えるときだけ `APP_ORIGIN` を明示します。
 7. デプロイ後、PC・スマホとも発行された公開URLからアクセスします。QRを実機で読み取り、携帯回線でも保存・復元を確認します。
 
-Render・Neon・Resendへの実接続と外部公開は、まだ実施していません。ローカルSQLiteをNeonへ自動移行する処理も実施していません。
+Render・Supabase・Resendへの実接続と外部公開は実施済みです。Resendのテスト用送信元からアカウント本人への配信成功と、別の宛先が制限で拒否されることを確認しました。ローカルSQLiteをSupabaseへ自動移行する処理は実施していません。
 
-PostgreSQLの実装は、PGliteをTCP接続で動かすテスト環境を用いて、Better Authのテーブル作成・登録・アカウント分離・同時保存の競合・再起動後のデータ維持・ログアウトを確認しました。Neonの実サービス接続・TLS・サービス停止からの復帰は、公開先設定後の確認事項です。
+PostgreSQLの実装は、PGliteをTCP接続で動かすテスト環境を用いて、Better Authのテーブル作成・登録・アカウント分離・同時保存の競合・再起動後のデータ維持・ログアウトを確認しました。Supabaseの実サービスへTLS接続し、Renderの正常性APIが成功することも確認済みです。
 
-参考：[Renderの無料枠と制約](https://render.com/docs/free)、[NeonのFreeプラン](https://neon.com/pricing)、[Resendの料金](https://resend.com/pricing)、[RenderのBlueprint設定](https://render.com/docs/blueprint-spec)、[Better AuthのPostgreSQL対応](https://better-auth.com/docs/adapters/postgresql)。
+参考：[Renderの無料枠と制約](https://render.com/docs/free)、[Supabaseの料金](https://supabase.com/pricing)、[Resendの料金](https://resend.com/pricing)、[Brevoの料金](https://help.brevo.com/hc/en-us/articles/208589409-About-Brevo-s-pricing-plans)、[RenderのBlueprint設定](https://render.com/docs/blueprint-spec)、[Better AuthのPostgreSQL対応](https://better-auth.com/docs/adapters/postgresql)。
 
 ## 別案：Railwayを使う場合
 
@@ -122,22 +122,22 @@ Railwayは公開先の候補です。アカウントへの接続・サービス�
 | `LINE_CLIENT_ID` / `LINE_CLIENT_SECRET`         | LINEログインを有効にする場合                                     |
 | `TRUSTED_PROXY_CIDRS`                           | 利用するプロキシの接続元を確認して設定。未設定時の制約は下記参照 |
 
-RailwayのHobby等ではSMTP接続が制限されるため、HTTPSによるResend配信にも対応しました。
-SMTPを使える公開先では従来のSMTP設定を利用できます。SMTPとResendは同時に設定しません。
+無料ホスティングではSMTP接続が制限される場合があるため、HTTPSによるResend・Brevo配信にも対応しました。
+SMTPを使える公開先では従来のSMTP設定を利用できます。SMTP、Resend、Brevoは同時に設定しません。
 Resendを使うにはアカウント・APIキー・送信ドメインの検証が必要です。テスト用送信元のままで一般ユーザーへの配信ができるとは限りません。
 
 認証の回数制限には接続元IPを使います。`TRUSTED_PROXY_CIDRS` 未設定時はプロキシ経由の利用者が同じ制限を共有する場合があります。ホスティングのネットワーク構成を確認し、実際の接続元だけを指定してください。無条件に全IPを信頼する設定は使いません。
 
-参考：[RailwayのExpress配備](https://docs.railway.com/guides/express)、[公開ネットワーク](https://docs.railway.com/networking/public-networking)、[Volume](https://docs.railway.com/volumes)、[SMTPの制限](https://docs.railway.com/networking/outbound-networking)、[ResendのメールAPI](https://resend.com/docs/api-reference/emails/send-email)。
+参考：[RailwayのExpress配備](https://docs.railway.com/guides/express)、[公開ネットワーク](https://docs.railway.com/networking/public-networking)、[Volume](https://docs.railway.com/volumes)、[SMTPの制限](https://docs.railway.com/networking/outbound-networking)、[ResendのメールAPI](https://resend.com/docs/api-reference/emails/send-email)、[BrevoのメールAPI](https://developers.brevo.com/docs/send-a-transactional-email)。
 
 ## 既存の単語帳を公開サーバーへ引き継ぐ
 
 新しい空のDBを使うと、以前のローカルアカウントと単語帳は自動では現れません。
 まずローカルアプリを停止して `.data` をバックアップします。
 SQLiteを継続する公開先では、公開先のアプリも停止した上でDBを永続ディスクへ移せます。
-NeonなどPostgreSQLを使う場合、SQLiteファイルをそのままコピーすることはできません。元データを保管した上で、アカウントと単語帳の移行を別途行う必要があります。
+SupabaseなどPostgreSQLを使う場合、SQLiteファイルをそのままコピーすることはできません。元データを保管した上で、アカウントと単語帳の移行を別途行う必要があります。
 認証情報を移行する場合は、同じ認証シークレットもサーバーの環境変数へ移し、公開URLで再ログインします。これらは公開ファイル置き場やGitに置かず、管理者用の安全な転送方法を使います。
-SMTP／Resendによるメール確認を有効にした後は、未確認アカウントに確認メールが届くことも確かめます。
+SMTP／Resend／Brevoによるメール確認を有効にした後は、未確認アカウントに確認メールが届くことも確かめます。
 実際のデータ移行はまだ実施していません。
 
 Google・LINEのコールバックURLも公開ドメインに変更します。
