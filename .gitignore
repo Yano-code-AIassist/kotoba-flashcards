@@ -12,3 +12,11 @@ build/
 .env
 .env.*
 !.env.example
+auth-secret
+client_secret*.json
+credentials*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx

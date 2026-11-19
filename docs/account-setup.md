@@ -25,6 +25,8 @@ npm run dev
 
 ### Google
 
+公開テスト版で入力する具体的なURLとRender環境変数は[公開版のGoogleログイン設定](google-public-login.md)を参照してください。
+
 1. [Google Cloud Console](https://console.cloud.google.com/)でプロジェクトとOAuth同意画面を設定します。
 2. 「ウェブアプリケーション」用のOAuthクライアントを作成します。
 3. 承認済みのリダイレクトURIに `http://127.0.0.1:5173/api/auth/callback/google` を登録します。
